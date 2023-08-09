@@ -6,6 +6,8 @@ const router = new Router();
 const config = require("config");
 const jwt = require("jsonwebtoken");
 const authMiddleware = require("../middleware/auth.middleware");
+const File = require('../models/file');
+const fileService = require("../services/fileService");
 
 router.post('/registration', 
   [
@@ -31,6 +33,8 @@ router.post('/registration',
     const user = new User({email, password: hashedPassword});
     
     await user.save();
+
+    await fileService.createDir(new File({user: user.id, name:''}));
 
     return res.json({message: "User was created!"});
 
