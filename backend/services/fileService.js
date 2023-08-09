@@ -10,13 +10,13 @@ class FileService {
     return new Promise(((resolve, reject) => {
       try {
         if(!fs.existsSync(filePath)) { //if file doesn't exist';
-          fs.mkdirSync(filePath);
+          fs.mkdirSync(filePath, { recursive: true });
           return resolve({message: "File was created!"});
         } else {
           return reject({message: "File already exist!"});
         }
       } catch (error) {
-        return reject({message: "File error"});
+        return reject({message: error.message});
       }
     }))
   }
