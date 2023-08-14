@@ -21,9 +21,8 @@ export const login = (email, password) => {
         email,
         password
       });
-      console.log(response.data);
-      dispatch(setUser(response.data.user));
-      localStorage.setItem('token', response.data.token);
+      dispatch(setUser(response.data.user)); //user data saves in the userReducer;
+      localStorage.setItem('token', response.data.token); //server returns an auth-token;
     } catch (error) {
       alert(error.response.data.message);
     }
